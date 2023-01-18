@@ -1,3 +1,5 @@
+#if defined(PIXHAWK)		// PIXHAWK
+
 void Check_Serial_Input_PIXHAWK() {
 
   // send data only when you receive data:
@@ -63,67 +65,69 @@ if (Command == 104) {                   // letter h
 
 if (Command == 97) {                   // letter a
     Command = 0;
-    Serial.println("");
-    Serial.println("ARMED");
-    Serial.println("");
+    Serial.println(F(""));
+    Serial.println(F("ARMED"));
+    Serial.println(F(""));
     Command_long_ARM();
     }
 
 if (Command == 100) {                   // letter d
     Command = 0;
-    Serial.println("");
-    Serial.println("DIS-ARM");
-    Serial.println("");
+    Serial.println(F(""));
+    Serial.println(F("DIS-ARM"));
+    Serial.println(F(""));
     Command_long_Disarm();
     }
 
 if (Command == 98) {                   // letter b
     Command = 0;
-    Serial.println("");
-    Serial.println("AUTO MODE");
-    Serial.println("");
+    Serial.println(F(""));
+    Serial.println(F("AUTO MODE"));
+    Serial.println(F(""));
     Auto_Mode();
     }
 
 if (Command == 102) {                   // letter f
     Command = 0;
-    Serial.println("");
-    Serial.println("Follow MODE");
-    Serial.println("");
+    Serial.println(F(""));
+    Serial.println(F("Follow MODE"));
+    Serial.println(F(""));
     Follow_Mode();
     }
 
 if (Command == 103) {                   // letter f
     Command = 0;
-    Serial.println("");
-    Serial.println("Guided MODE");
-    Serial.println("");
+    Serial.println(F(""));
+    Serial.println(F("Guided MODE"));
+    Serial.println(F(""));
     Guided_Mode();
     }
 
 if (Command == 109) {                   // letter m
     Command = 0;
-    Serial.println("");
-    Serial.println("Manual MODE");
-    Serial.println("");
+    Serial.println(F(""));
+    Serial.println(F("Manual MODE"));
+    Serial.println(F(""));
     Manual_Mode();
     }
 
 if (Command == 110) {                   // letter n
     Command = 0;
-    Serial.println("");
-    Serial.println("ACRO Mode");
-    Serial.println("");
+    Serial.println(F(""));
+    Serial.println(F("ACRO Mode"));
+    Serial.println(F(""));
     Acro_Mode();
     }
 
 if (Command == 113) {                   // letter q
     Command = 0;
-      Serial.println("");
-      Serial.println("Mower set to ReP_AL Mode");
-      Serial.println("");
+      Serial.println(F(""));
+      Serial.println(F("Mower set to ReP_AL Mode"));
+      Serial.println(F(""));
       Mower_Docked = 1;
       Mower_PIXHAWK = 0;
       }
 
 }
+
+#endif

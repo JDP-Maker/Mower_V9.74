@@ -25,20 +25,20 @@ void Get_GYRO_Reading() {
         
          Heading = atan2(yAng, xAng);
                 
-         Serial.print("|GX=");
+         Serial.print(F("|GX="));
          Serial.print(GYRO_Angle_X);
-         Serial.print("|GY=");
+         Serial.print(F("|GY="));
          Serial.print(GYRO_Angle_Y);             
-         Serial.print("|GZ=");
+         Serial.print(F("|GZ="));
          Serial.print(GYRO_Angle_Z);
          //delay(100);
          } 
 
 void Print_GYRO_Reading() {              
-         Serial.print(" | tmp = ");    Serial.print(Temp/340.00+36.53);
-         Serial.print(" | Gyro X = "); Serial.print(convert_int16_to_str(GyX));
-         Serial.print(" | Gyro Y = "); Serial.print(convert_int16_to_str(GyY));
-         Serial.print(" | Gyro Z = "); Serial.println(convert_int16_to_str(GyZ));
+         Serial.print(F(" | tmp = "));    Serial.print(Temp/340.00+36.53);
+         Serial.print(F(" | Gyro X = ")); Serial.print(convert_int16_to_str(GyX));
+         Serial.print(F(" | Gyro Y = ")); Serial.print(convert_int16_to_str(GyY));
+         Serial.print(F(" | Gyro Z = ")); Serial.println(convert_int16_to_str(GyZ));
          delay(100);
          } 
 

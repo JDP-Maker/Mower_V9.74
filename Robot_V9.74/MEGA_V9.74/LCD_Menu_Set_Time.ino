@@ -834,8 +834,8 @@ if (Menu_Mode_Selection == 4) {
           rtc.halt(false);
           Serial.print(F("Clock : "));
           Serial.print(set_hour);
-          Serial.print(":");
-          if (set_min < 10) Serial.print("0");
+          Serial.print(F(":"));
+          if (set_min < 10) Serial.print(F("0"));
           Serial.println(set_min);
           Time t(2019, 07, 19, set_hour, set_min, 00, Time::kFriday);            // Year XXXX, Month XX, Day XX, Hour XX, Minute XX, Second, kXYZday
           rtc.time(t);    

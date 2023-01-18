@@ -1,70 +1,73 @@
- // Listens to the serial 3 port if a menu command has been executed.
+// Listens to the serial 3 port if a menu command has been executed.
 void Check_TFT_Serial_Input() {
 	byte recvBuff [3] = {0};
-
+	
 	if (SerialCom3.update ())
 	{
-	  byte length = SerialCom3.getLength ();
-	  if (length > sizeof (recvBuff)) length = sizeof (recvBuff);
-	  memcpy (&recvBuff, SerialCom3.getData (), length);
-
-	  if (recvBuff[0] == 21) {
-		  TFT_Menu_Command =   recvBuff[1] | recvBuff[2] << 8;
-		  Serial.print(F("|TFTserIn:OK|"));
-
-		  Confirm_TX_or_RX_Action();    // Prints the Menu Selected
-		  Confirm_RX();
-		  delay(5);
-		  Send_Data_To_TFT();                                   // Send data to TFT - depends on menu code received
-		  Receive_Data_From_TFT();                              // Receive Data from TFT - depends on menu code received
-	  }
+		byte length = SerialCom3.getLength ();
+		if (length > sizeof (recvBuff)) length = sizeof (recvBuff);
+		memcpy (&recvBuff, SerialCom3.getData (), length);
+		
+		if (recvBuff[0] == 21) {
+			TFT_Menu_Command =   recvBuff[1] | recvBuff[2] << 8;
+			Serial.print(F("|TFTserIn:OK|"));
+			
+			Confirm_TX_or_RX_Action();    // Prints the Menu Selected
+			Confirm_RX();
+			delay(5);
+			Send_Data_To_TFT();                                   // Send data to TFT - depends on menu code received
+			Receive_Data_From_TFT();                              // Receive Data from TFT - depends on menu code received
+		}
 	}  // end if something received
 }
 
 
 
 void Activate_TFT_Menu() {
-
-        Serial.println();
-        Serial.println(F("TFT Menu Activated"));
-        Menu_Complete_TFT = false;                                // Menu complete will return to the normal loop
-        Serial.println("waiting for command");
-     
-     while (Menu_Complete_TFT == false) {                      // holds the program in a loop until a selection has been made in the membrane button menu
-          Check_TFT_Serial_Input();
-          if (TFT_Menu_Command == 1) Menu_Complete_TFT = true;  
-          if (Mower_PIXHAWK == 1) Run_in_TFT_PIXHAWK_Mode();        // Runs the Mower even though its in the TFT Menu
-          }
-
-      }
-
-
-
-void Run_in_TFT_PIXHAWK_Mode() {
-
-   
-   while (Mower_PIXHAWK == true) {  
-     Check_TFT_Serial_Input();
-     Check_PIXHAWK();       
-     if (PIXHAWK_Armed == 1) Check_PIXHAWK_PWM();  
-     Serial.println("");   
-     }
-  
+	
+	Serial.println();
+	Serial.println(F("TFT Menu Activated"));
+	Menu_Complete_TFT = false;                                // Menu complete will return to the normal loop
+	Serial.println("waiting for command");
+	
+	while (Menu_Complete_TFT == false) {                      // holds the program in a loop until a selection has been made in the membrane button menu
+		Check_TFT_Serial_Input();
+		if (TFT_Menu_Command == 1) Menu_Complete_TFT = true;
+		#if defined(PIXHAWK)		// PIXHAWK
+			if (Mower_PIXHAWK == 1) Run_in_TFT_PIXHAWK_Mode();        // Runs the Mower even though its in the TFT Menu
+		#endif
+	}
+	
 }
 
+
+#if defined(PIXHAWK)		// PIXHAWK
+void Run_in_TFT_PIXHAWK_Mode() {
+
+
+while (Mower_PIXHAWK == true) {  
+Check_TFT_Serial_Input();
+Check_PIXHAWK();       
+if (PIXHAWK_Armed == 1) Check_PIXHAWK_PWM();  
+Serial.println("");   
+}
+
+}
+#endif
+
 void Confirm_RX() {      
-      // confirms to the TFT that a request for data transfer has been received.
-  	byte data[3];
-  	data[0] = 22; // Packet ID
+// confirms to the TFT that a request for data transfer has been received.
+byte data[3];
+data[0] = 22; // Packet ID
 
-  	int TFT_Menu_Command_Buf = TFT_Menu_Command * 3;
-  	data[1]=TFT_Menu_Command_Buf;
-  	data[2]=TFT_Menu_Command_Buf >> 8;
+int TFT_Menu_Command_Buf = TFT_Menu_Command * 3;
+data[1]=TFT_Menu_Command_Buf;
+data[2]=TFT_Menu_Command_Buf >> 8;
 
-  	SerialCom3.sendMsg (data, sizeof (data));
-      Serial.print("Confirmstion Code Sent : ");
-      Serial.println(TFT_Menu_Command * 3); 
-      }
+SerialCom3.sendMsg (data, sizeof (data));
+Serial.print(F("Confirmstion Code Sent : "));
+Serial.println(TFT_Menu_Command * 3); 
+}
 
 
 
@@ -72,9 +75,9 @@ void Confirm_RX() {
 // Based on the code received this menu confirms the menu item to be used.
 void Confirm_TX_or_RX_Action() {
 
-Serial.print("TFT Menu Command: ");
-Serial.print(TFT_Menu_Command );
-Serial.print(" = ");
+Serial.print(F("TFT Menu Command: "));
+Serial.print(TFT_Menu_Command);
+Serial.print(F(" = "));
 
 if (TFT_Menu_Command == 1)  Serial.println(F("Main Menu"));
 if (TFT_Menu_Command == 2)  Serial.println(F("Quick Start Menu"));
@@ -106,7 +109,9 @@ if (TFT_Menu_Command == 27) Serial.println(F("Compass Menu"));
 if (TFT_Menu_Command == 28) Serial.println(F("GYRO Menu"));
 if (TFT_Menu_Command == 29) Serial.println(F("Wheel Block Amps Menu"));
 if (TFT_Menu_Command == 30) Serial.println(F("Setup Other Menu"));
+#if defined(PIXHAWK)		// PIXHAWK
 if (TFT_Menu_Command == 31) Serial.println(F("PIXHAWK Go Menu"));
+#endif
 if (TFT_Menu_Command == 32) Serial.println(F("GPS Main Menu"));
 
 if (TFT_Menu_Command == 38) Serial.println(F("Wheel Amp Test"));
@@ -130,7 +135,9 @@ if (TFT_Menu_Command == 59) Serial.println(F("Test Lift Mechanism"));
 if (TFT_Menu_Command == 60) Serial.println(F("Test Lift Mechanism UP"));
 if (TFT_Menu_Command == 61) Serial.println(F("Test Lift Mechanism DOWN"));
 if (TFT_Menu_Command == 62) Serial.println(F("Initiate Drill Test"));
+#if defined(PIXHAWK)		// PIXHAWK
 if (TFT_Menu_Command == 63) Serial.println(F("PIXHAWK Test"));
+#endif
 if (TFT_Menu_Command == 64) Serial.println(F("Start PWM Read"));
 if (TFT_Menu_Command == 65) Serial.println(F("Wheel Test Method 2"));
 if (TFT_Menu_Command == 66) Serial.println(F("Left Front Forwards"));

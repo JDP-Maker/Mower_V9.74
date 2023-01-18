@@ -7,7 +7,7 @@ void Load_EEPROM_Saved_Data() {
 
   #if defined(BOARD_MEGA)
 
-Serial.println("Loading EEPROM / Settings");
+Serial.println(F("Loading EEPROM / Settings"));
 
   int Robot_Type_EEPROM = EEPROM.read(121);
   if (Robot_Type_EEPROM == 1) {
@@ -61,14 +61,14 @@ Serial.println("Loading EEPROM / Settings");
       Serial.print(F("EEPROM Alarm 1 Active | Time Set:"));
       Serial.print(Alarm_1_Hour);
       Serial.print(F(":"));
-      if (Alarm_1_Minute < 10) Serial.print("0");
+      if (Alarm_1_Minute < 10) Serial.print(F("0"));
       Serial.print(Alarm_1_Minute);
-      Serial.print(" | Action :");
-      if (Alarm_1_Action == 1) Serial.println("Exit Zone 1");
-      if (Alarm_1_Action == 2) Serial.println("Exit Zone 2");
-      if (Alarm_1_Action == 3) Serial.println("Mow the Line");
-      if (Alarm_1_Action == 4) Serial.println("Quick Start");
-      if (Alarm_1_Action == 5) Serial.println("Custom");
+      Serial.print(F(" | Action :"));
+      if (Alarm_1_Action == 1) Serial.println(F("Exit Zone 1"));
+      if (Alarm_1_Action == 2) Serial.println(F("Exit Zone 2"));
+      if (Alarm_1_Action == 3) Serial.println(F("Mow the Line"));
+      if (Alarm_1_Action == 4) Serial.println(F("Quick Start"));
+      if (Alarm_1_Action == 5) Serial.println(F("Custom"));
       }
     }
   if (Alarm_1_Saved_EEPROM != 1) {
@@ -76,14 +76,14 @@ Serial.println("Loading EEPROM / Settings");
       Serial.print(F("Settings: Alarm 1 Active | Time Set:"));
       Serial.print(Alarm_1_Hour);
       Serial.print(F(":"));
-      if (Alarm_1_Minute < 10) Serial.print("0");
+	if (Alarm_1_Minute < 10) Serial.print(F("0"));
       Serial.print(Alarm_1_Minute);
-      Serial.print(" | Action :");
-      if (Alarm_1_Action == 1) Serial.println("Exit Zone 1");
-      if (Alarm_1_Action == 2) Serial.println("Exit Zone 2");
-      if (Alarm_1_Action == 3) Serial.println("Mow the Line");
-      if (Alarm_1_Action == 4) Serial.println("Quick Start");
-      if (Alarm_1_Action == 5) Serial.println("Custom");
+      Serial.print(F(" | Action :"));
+      if (Alarm_1_Action == 1) Serial.println(F("Exit Zone 1"));
+      if (Alarm_1_Action == 2) Serial.println(F("Exit Zone 2"));
+      if (Alarm_1_Action == 3) Serial.println(F("Mow the Line"));
+      if (Alarm_1_Action == 4) Serial.println(F("Quick Start"));
+      if (Alarm_1_Action == 5) Serial.println(F("Custom"));
       }
   }
     
@@ -110,9 +110,9 @@ Serial.println("Loading EEPROM / Settings");
       Serial.print(F("Alarm 2 Active | Time Set:"));
       Serial.print(Alarm_2_Hour);
       Serial.print(F(":"));
-      if (Alarm_2_Minute < 10) Serial.print("0");
+      if (Alarm_2_Minute < 10) Serial.print(F("0"));
       Serial.print(Alarm_2_Minute);  
-      Serial.print(" | Action :");
+	Serial.print(F(" | Action :"));
       if (Alarm_2_Action == 1) Serial.println("Exit Zone 1");
       if (Alarm_2_Action == 2) Serial.println("Exit Zone 2");
       if (Alarm_2_Action == 3) Serial.println("Mow the Line");
@@ -127,14 +127,14 @@ Serial.println("Loading EEPROM / Settings");
       Serial.print(F("Settings: Alarm 2 Active | Time Set:"));
       Serial.print(Alarm_2_Hour);
       Serial.print(F(":"));
-      if (Alarm_2_Minute < 10) Serial.print("0");
+      if (Alarm_2_Minute < 10) Serial.print(F("0"));
       Serial.print(Alarm_2_Minute);
-      Serial.print(" | Action :");
-      if (Alarm_2_Action == 1) Serial.println("Exit Zone 1");
-      if (Alarm_2_Action == 2) Serial.println("Exit Zone 2");
-      if (Alarm_2_Action == 3) Serial.println("Mow the Line");
-      if (Alarm_2_Action == 4) Serial.println("Quick Start");
-      if (Alarm_2_Action == 5) Serial.println("Custom");
+      Serial.print(F(" | Action :"));
+      if (Alarm_2_Action == 1) Serial.println(F("Exit Zone 1"));
+      if (Alarm_2_Action == 2) Serial.println(F("Exit Zone 2"));
+      if (Alarm_2_Action == 3) Serial.println(F("Mow the Line"));
+	if (Alarm_2_Action == 4) Serial.println(F("Quick Start"));
+      if (Alarm_2_Action == 5) Serial.println(F("Custom"));
       }
   }
 
@@ -163,14 +163,14 @@ Serial.println("Loading EEPROM / Settings");
       Serial.print(F("Alarm 3 Active | Time Set:"));
       Serial.print(Alarm_3_Hour);
       Serial.print(F(":"));
-      if (Alarm_3_Minute < 10) Serial.print("0");
+      if (Alarm_3_Minute < 10) Serial.print(F("0"));
       Serial.print(Alarm_3_Minute);
-      Serial.print(" | Action :");
-      if (Alarm_3_Action == 1) Serial.println("Exit Zone 1");
-      if (Alarm_3_Action == 2) Serial.println("Exit Zone 2");
-      if (Alarm_3_Action == 3) Serial.println("Mow the Line");
-      if (Alarm_3_Action == 4) Serial.println("Quick Start");
-      if (Alarm_3_Action == 5) Serial.println("Custom");  
+      Serial.print(F(" | Action :"));
+      if (Alarm_3_Action == 1) Serial.println(F("Exit Zone 1"));
+      if (Alarm_3_Action == 2) Serial.println(F("Exit Zone 2"));
+      if (Alarm_3_Action == 3) Serial.println(F("Mow the Line"));
+      if (Alarm_3_Action == 4) Serial.println(F("Quick Start"));
+      if (Alarm_3_Action == 5) Serial.println(F("Custom"));  
       }
 
     }
@@ -180,14 +180,14 @@ Serial.println("Loading EEPROM / Settings");
       Serial.print(F("Settings: Alarm 3 Active | Time Set:"));
       Serial.print(Alarm_3_Hour);
       Serial.print(F(":"));
-      if (Alarm_3_Minute < 10) Serial.print("0");
+      if (Alarm_3_Minute < 10) Serial.print(F("0"));
       Serial.print(Alarm_3_Minute);
-      Serial.print(" | Action :");
-      if (Alarm_3_Action == 1) Serial.println("Exit Zone 1");
-      if (Alarm_3_Action == 2) Serial.println("Exit Zone 2");
-      if (Alarm_3_Action == 3) Serial.println("Mow the Line");
-      if (Alarm_3_Action == 4) Serial.println("Quick Start");
-      if (Alarm_3_Action == 5) Serial.println("Custom");
+      Serial.print(F(" | Action :"));
+      if (Alarm_3_Action == 1) Serial.println(F("Exit Zone 1"));
+      if (Alarm_3_Action == 2) Serial.println(F("Exit Zone 2"));
+      if (Alarm_3_Action == 3) Serial.println(F("Mow the Line"));
+      if (Alarm_3_Action == 4) Serial.println(F("Quick Start"));
+      if (Alarm_3_Action == 5) Serial.println(F("Custom"));
       }
   }
     

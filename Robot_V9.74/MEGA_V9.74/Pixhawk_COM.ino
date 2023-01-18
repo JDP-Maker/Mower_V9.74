@@ -1,4 +1,4 @@
-
+#if defined(PIXHAWK)		// PIXHAWK
 
 void Set_Mode_PIXHAWK() {
   Mower_PIXHAWK = 1;
@@ -57,7 +57,7 @@ void Check_PIXHAWK() {
     if(num_hbs_pasados>=num_hbs) {
     
     // Request streams from Pixhawk
-    Serial.println("Streams requested!");
+    Serial.println(F("Streams requested!"));
     Mav_Request_Data();
     num_hbs_pasados=0;
     }
@@ -71,7 +71,7 @@ void Check_PIXHAWK() {
 
 
 void Mav_Request_Data()  {
-//Serial.println("COM_Request");
+//Serial.println(F("COM_Request"));
 
     
   mavlink_message_t msg;
@@ -154,13 +154,13 @@ void Mav_Request_Data()  {
 
 void comm_receive() {
 
-  //Serial.println("COM_Receive");
+  //Serial.println(F("COM_Receive"));
 
   mavlink_message_t msg;
   mavlink_status_t status;
  
   // Echo for manual debugging
-  // Serial.println("---Start---");
+  // Serial.println(F("---Start---"));
 
 
   while(Pixhawk_Serial.available()>0) {
@@ -190,15 +190,15 @@ void comm_receive() {
   
             float Battery_Volts = sys_status.voltage_battery;
                     
-            Serial.print("Volts: ");
+            Serial.print(F("Volts: "));
             Serial.print(Battery_Volts / 1000 );
-            Serial.print(" Amps: ");
+            Serial.print(F(" Amps: "));
             Serial.print(sys_status.current_battery);
-            //Serial.print(" Sensors: ");
+            //Serial.print(F(" Sensors: "));
             //Serial.print(sys_status.onboard_control_sensors_health);
-            //Serial.print("], [Comms loss (%): ");
+            //Serial.print(F("], [Comms loss (%): "));
             //Serial.print(sys_status.drop_rate_comm);
-            //Serial.print("] ");
+            //Serial.print(F("] "));
 
           }
           break;
@@ -212,16 +212,16 @@ void comm_receive() {
             mavlink_param_value_t param_value;
             mavlink_msg_param_value_decode(&msg, &param_value);
 
-            Serial.println("PX PARAM_VALUE");
-            Serial.print(" Value: ");
+            Serial.println(F("PX PARAM_VALUE"));
+            Serial.print(F(" Value: "));
             Serial.print(param_value.param_value);
-            Serial.print(" Count: ");
+            Serial.print(F(" Count: "));
             Serial.print(param_value.param_count);
-            Serial.print(" Index: ");
+            Serial.print(F(" Index: "));
             Serial.print(param_value.param_index);
-            Serial.print(" ID: ");
+            Serial.print(F(" ID: "));
             Serial.print(param_value.param_id);
-            Serial.print(" Type: ");
+            Serial.print(F(" Type: "));
             Serial.print(param_value.param_type);
           }
           break;
@@ -233,7 +233,7 @@ void comm_receive() {
              */
             mavlink_raw_imu_t raw_imu;
             mavlink_msg_raw_imu_decode(&msg, &raw_imu);
-            //Serial.println("PX RAW IMU");
+            //Serial.println(F("PX RAW IMU"));
             //Serial.println(raw_imu.xacc);
 
           }
@@ -247,11 +247,11 @@ void comm_receive() {
             mavlink_attitude_t attitude;
             mavlink_msg_attitude_decode(&msg, &attitude);
 
-            Serial.print(" ROLL : ");
+            Serial.print(F(" ROLL : "));
             Serial.print(attitude.roll);
-            Serial.print(" YAW : ");
+            Serial.print(F(" YAW : "));
             Serial.print(attitude.yaw);
-            Serial.print(" PITCH : ");
+            Serial.print(F(" PITCH : "));
             Serial.println(attitude.pitch);
           }
           break;
@@ -457,3 +457,4 @@ void Guided_Mode() {
 
   
   }
+#endif

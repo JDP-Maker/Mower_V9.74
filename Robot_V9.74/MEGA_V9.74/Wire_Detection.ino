@@ -80,7 +80,7 @@ void Check_Wire_In_Out() {
       Serial.println(F(""));
       Serial.print(F("|Wire Refind Atempts:"));
       Serial.print(Wire_Refind_Tries);
-      Serial.print("|");
+      Serial.print(F("|"));
       Serial.println(F(""));
       if (Wire_Refind_Tries > 4) {
         Motor_Action_Stop_Motors(); 
@@ -123,7 +123,7 @@ void Running_Test_for_Boundary_Wire()  {
    
     // If the MAG field is very low between these values we can assume the wire is off
     if ( (MAG_Now > -20 ) && (MAG_Now < 20 )  ) {
-      //Serial.print("WIRE Not Detected");
+      //Serial.print(F("WIRE Not Detected"));
       Wire_Detected = 0;
       Print_LCD_NO_Wire();
       Wire_Off = Wire_Off + 1;
@@ -133,7 +133,7 @@ void Running_Test_for_Boundary_Wire()  {
     // if the MAG field is strong then the wire is on.
     if (   (MAG_Now <= -21) || (MAG_Now >= 20)  ) {
       Print_LCD_Wire_ON();  
-      //Serial.print("WIRE Detected");
+      //Serial.print(F("WIRE Detected"));
       Wire_Detected = 1;                                            // Wire is detected  
       Wire_Off = 0;                                                 // Resets the counter
       }

@@ -1,6 +1,6 @@
 void Execute_Fake_It() {
       
-      Serial.print("Fake:ON|");
+      Serial.print(F("Fake:ON|"));
       Volts = 12.6;
       Amps = 0.2;
       Outside_Wire = 0;                                               // Outside wire variable is tuend off

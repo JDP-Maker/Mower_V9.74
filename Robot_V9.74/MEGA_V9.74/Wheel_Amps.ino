@@ -69,7 +69,7 @@ void Test_Check_Wheel_Amps() {
             Wheel_Blocked_Count = Wheel_Blocked_Count + 1;
             if (Wheel_Blocked_Count > Wheel_Blocked_Count_Max) {
                 Serial.println(F(""));
-                Serial.print("!! Wheel_Blocked !!");
+                Serial.print(F("!! Wheel_Blocked !!"));
                 Serial.print(F("|")); 
                 Wheel_Blocked = 4;
                 }

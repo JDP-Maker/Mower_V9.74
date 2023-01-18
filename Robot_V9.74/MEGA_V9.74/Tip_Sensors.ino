@@ -11,7 +11,7 @@ void Check_Tilt_Tip_Angle() {
   if (Angle_Sensor_Enabled == 1)  {  
       Tilt_Angle_Sensed = digitalRead(Tilt_Angle);          // reads the Tilt Angle sensor
       // Check if the Tilt Sensor is active
-      Serial.print("|A:");
+      Serial.print(F("|A:"));
       Serial.print(Tilt_Angle_Sensed); 
       if ((Mower_Running == 1) && (Tilt_Angle_Sensed == 0) && (Tilt_Orientation_Sensed == 0)) Take_Tilt_Action();
       }
@@ -22,9 +22,9 @@ void Check_Tilt_Tip_Angle() {
   // Check Tip Sensor
   if (Tip_Over_Sensor_Enabled == 1) {
     Tilt_Orientation_Sensed = digitalRead(Tilt_Orientation);    // reads the Tilt Orientation sensor
-    Serial.print("|O:");
+    Serial.print(F("|O:"));
     Serial.print(Tilt_Orientation_Sensed);
-    Serial.print("|"); 
+    Serial.print(F("|")); 
     if ((Mower_Running == 1) && (Tilt_Orientation_Sensed == 1)) Take_Orientation_Action();
     }
   if (Tip_Over_Sensor_Enabled == 0) {

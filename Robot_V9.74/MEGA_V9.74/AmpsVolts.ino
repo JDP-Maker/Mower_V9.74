@@ -169,8 +169,8 @@ if (Show_TX_Data == 1) {
 
  if (Amps < Amps_Charging_Setting) Charging = 0;
  if (Amps >= Amps_Charging_Setting) Charging = 4;
- //Serial.print("Charging = ");  
+ //Serial.print(F("Charging = "));  
  //Serial.print(Charging);
- //Serial.print("|");
+ //Serial.print(F("|"));
 
 }

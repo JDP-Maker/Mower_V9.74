@@ -1,3 +1,5 @@
+#if defined(PIXHAWK)		// PIXHAWK
+
 //https://www.benripley.com/diy/arduino/three-ways-to-read-a-pwm-signal-with-arduino/
 
 
@@ -14,14 +16,14 @@ void Check_PIXHAWK_PWM() {
     Check_Motor_PWM_RH();
     Calibrate_Initial_PWM_RH();
 
-    Serial.print("LH Calib | Min =");
+    Serial.print(F("LH Calib | Min ="));
     Serial.print(Motor_C_PWM_Min);
-    Serial.print("  Max =");
+    Serial.print(F("  Max ="));
     Serial.print(Motor_C_PWM_Max);
     
-    Serial.print(" RH Calib | Min =");
+    Serial.print(F(" RH Calib | Min ="));
     Serial.print(Motor_D_PWM_Min);
-    Serial.print("  Max =");
+    Serial.print(F("  Max ="));
     Serial.println(Motor_D_PWM_Max);
     Calibration_Done = 1;
     }
@@ -30,51 +32,51 @@ void Check_PIXHAWK_PWM() {
 
   int Wheel_ON_PWM = 20;
 
-  Serial.print(  "Motor_C(LH)= ");
+  Serial.print(F(  "Motor_C(LH)= "));
 
   Check_Motor_PWM_LH();
   Calculate_PWM_Arduino_Output_LH();
   
   if (PWM_Arduino_LH >= Wheel_ON_PWM) { 
-    Serial.print("ON | PWM_Pix = ");
+    Serial.print(F("ON | PWM_Pix = "));
     Serial.print(PIXHAWK_PWM_Value_LH);
     Calculate_PWM_Arduino_Output_LH();
-    Serial.print(" | PWM_Ard = ");
+    Serial.print(F(" | PWM_Ard = "));
     Serial.print(PWM_Arduino_LH);    
   }
   if (PWM_Arduino_LH  < Wheel_ON_PWM) {
-    Serial.print("OFF | PWM_Pix=");
+    Serial.print(F("OFF | PWM_Pix="));
     Serial.print(PIXHAWK_PWM_Value_LH);
     Calculate_PWM_Arduino_Output_LH();
-    Serial.print(" | PWM_Ard=");
+    Serial.print(F(" | PWM_Ard="));
     Serial.print(PWM_Arduino_LH);    
   }
 
-  Serial.print("    Motor_D(RH = ");
+  Serial.print(F("    Motor_D(RH = "));
 
   Check_Motor_PWM_RH();
   Calculate_PWM_Arduino_Output_RH();
 
   if (PWM_Arduino_RH  >= Wheel_ON_PWM) {
-    Serial.print(" ON | PWM_Pix = ");
+    Serial.print(F(" ON | PWM_Pix = "));
     Serial.print(PIXHAWK_PWM_Value_RH);
     Calculate_PWM_Arduino_Output_RH();
-    Serial.print(" | PWM_Ard = ");
+    Serial.print(F(" | PWM_Ard = "));
     Serial.print(PWM_Arduino_RH);    
   }
   if (PWM_Arduino_RH < Wheel_ON_PWM) {
-    Serial.print(" OFF | PWM_Pix = ");
+    Serial.print(F(" OFF | PWM_Pix = "));
     Serial.print(PIXHAWK_PWM_Value_RH);
     Calculate_PWM_Arduino_Output_RH();
-    Serial.print(" | PWM_Ard = ");
+    Serial.print(F(" | PWM_Ard = "));
     Serial.print(PWM_Arduino_RH);    
   }
 
-  Serial.print("  |  ");
+  Serial.print(F("  |  "));
   PWM_Left = PWM_Arduino_LH;
   PWM_Right = PWM_Arduino_RH;
   Motor_Action_Dynamic_PWM_Steering();
-  //Serial.println("");
+  //Serial.println(F(""));
 }
 
  
@@ -118,3 +120,5 @@ void Calibrate_Initial_PWM_RH() {
     Motor_D_PWM_Min = PIXHAWK_PWM_Value_RH;
     Motor_D_PWM_Max = PIXHAWK_PWM_Value_RH + 305;
     }
+
+#endif

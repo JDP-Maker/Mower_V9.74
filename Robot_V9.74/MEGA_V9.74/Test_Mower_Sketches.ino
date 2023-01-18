@@ -451,14 +451,14 @@ int PingSonarY(int trigPinY, int echoPinY, int distanceY, long durationY, int so
     distanceY = 999;
     Serial.print(F("SONAR "));
     Serial.print(sonarY);
-    Serial.print(": ");
+    Serial.print(F(": "));
     Serial.println(F("NO PING ERROR REMOVED"));
   }
 
   /*Prints the Sonar letter and distance measured on the serial Monitor*/
   Serial.print(F("SONAR "));
   Serial.print(sonarY);
-  Serial.print(": ");
+  Serial.print(F(": "));
   Serial.print(distanceY);
   Serial.println(F(" cm"));
   //Serial.println(maxdistancesonar);

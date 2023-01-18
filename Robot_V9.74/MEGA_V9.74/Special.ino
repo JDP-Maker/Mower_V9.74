@@ -31,7 +31,7 @@ void Manouver_Exit_From_Docking_Station(){
     Motor_Action_GoFullSpeed_Out_Garage();                          // Turn the wheels
     Serial.print(F("Left Wheel PWM:"));
     Serial.print(PWM_MaxSpeed_LH);
-    Serial.print("|");
+    Serial.print(F("|"));
     Serial.print(F("Right Wheel PWM:"));
     Serial.println(PWM_MaxSpeed_RH);   
     delay (4000);                                             // Backwards time
@@ -66,6 +66,7 @@ void Manouver_Exit_From_Docking_Station(){
     SetPins_ToGoForwards();                                         // Set to go wheel motor pins to go forwards
     Motor_Action_Stop_Motors();                                     // Stop / Park the mower here
 
+	#if defined(PIXHAWK)		// PIXHAWK
     if ((GPS_Enabled == true) && (GPS_Type == 2) && (Run_PIXHAWK_Mission_At_Exit == true)) {
       Serial.println("");
       Serial.println(F("Mower set to PIXHAWK Mode"));
@@ -81,7 +82,8 @@ void Manouver_Exit_From_Docking_Station(){
       Serial.println("");
       Auto_Mode();
       }
-
+	#endif
+	
     #if defined(LCD_KEYPAD)
     lcd.clear();                                                    // Clears the LCD display
     lcd.print("Garage Clear");                                      // Prints to the LCD screen       
@@ -157,7 +159,7 @@ void Specials_Find_Wire_Track()  {
         Wire_Find_Attempt = Wire_Find_Attempt + 1;                                                      // Counts how many loops have passed to find the wire.
         Serial.print(F("No Wire Count Backwards:"));
         Serial.print(Wire_Find_Attempt);
-        Serial.print("|");
+        Serial.print(F("|"));
         }
       
       }
@@ -199,9 +201,9 @@ void Specials_Find_Wire_Track()  {
           PrintBoundaryWireStatus();                                                        // Prints of the status of the wire sensor readings.
           Serial.println(F(""));
           Wire_Find_Attempt = Wire_Find_Attempt + 1;                                                    // Counts how many loops have passed to find the wire.
-          Serial.print("No Wire Count Forwards:");
+          Serial.print(F("No Wire Count Forwards:"));
           Serial.print(Wire_Find_Attempt);
-          Serial.print("|");
+          Serial.print(F("|"));
           }
       }
       Motor_Action_Stop_Motors();

@@ -115,7 +115,7 @@ int PingSonarX(int trigPinX, int echoPinX, int distanceX, long durationX, int so
       Sonar_Hit = 1;  
       Print_Sonar_Hit();
       Serial.println(F(""));
-      Serial.println("Sonar Hit Detected");
+      Serial.println(F("Sonar Hit Detected"));
       }
     
     }

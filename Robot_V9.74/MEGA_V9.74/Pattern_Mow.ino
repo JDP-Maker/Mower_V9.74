@@ -187,7 +187,7 @@ void Pattern_Mow_Parallel() {
           Motor_Action_Dynamic_PWM_Steering();              // Removes the full speed function if the mower is trying to hold to the compass heading.
           Print_LCD_Parallel_Mowing();
           Serial.print(F("C-Lock:ON_"));
-          Serial.print("|");
+          Serial.print(F("|"));
           }
         }
      }

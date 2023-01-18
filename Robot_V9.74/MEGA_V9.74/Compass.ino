@@ -339,10 +339,10 @@ if (Compass_Target >= 180) {
         Get_Compass_Reading();
   
         Attemps_Compass_Turn = Attemps_Compass_Turn + 1;
-        Serial.print("Atempts:");
+        Serial.print(F("Atempts:"));
         Serial.print(Attemps_Compass_Turn);
-        Serial.print("|");
-        Serial.println("");
+        Serial.print(F("|"));
+        Serial.println(F(""));
        }
       }   
 

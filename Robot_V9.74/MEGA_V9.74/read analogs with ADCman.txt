@@ -16,7 +16,8 @@ bool Use_MEGA_for_Analog_reads    = 1;							// Use the MEGA for battery info, r
 
 In void setup section - nothing else because setup already call ADCman setup
 //******************* added by JDP ************************************************************************* 
-if (Use_NANO == 1) Serial1.begin(1200);				  // Open Serial port 1 for the nano communication
+if (Use_NANO == 1) Serial1.begin(57600);	//JDP added if								                  // Open Serial port 1 for the nano communication
+if (Use_NANO == 1) SerialCom1.begin ();	//JDP added if
 //**********************************************************************************************************
 
 In void Loop section
@@ -85,9 +86,9 @@ void Read_Bat_Rain_Wheel() {
       Rain_Detected = ADCMan.read(Rain_Sensor);                             // 
       RawWheelAmp = ADCMan.read(Wheel_Amps);                                // 
 
-  //Serial.print("WAMpRaw: ");
+  //Serial.print(F("WAMpRaw: "));
   //Serial.print(RawWheelAmp);
-  //Serial.print(" |");
+  //Serial.print(F(" |"));
 
 Calculate_Volt_Amp_Charge();
 
