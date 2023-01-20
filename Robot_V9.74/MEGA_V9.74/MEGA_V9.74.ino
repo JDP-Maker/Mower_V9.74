@@ -30,30 +30,30 @@
 //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
 //Libraries for Perimeter Wire Receiver
-#include <Arduino.h>
-#include <Wire.h>
+#include <Arduino.h>		//built in
+#include <Wire.h>			//built in
 
-#include "drivers.h"		// used by adcman to find perimeter wire
-#include "adcman.h"			// used to find perimeter wire
-#include "perimeter.h"		// used for perimeter v2 receiver for Arduino sound sensors/LM386 using digital filter: matched filter - evaluates signal polarity of 'pulse3' signal on one ADC pin (for one coil)
-#include "RemoteXY_WIFI.h"	// JDP used for android remote control and menus
+#include <drivers.h>		// used by adcman to find perimeter wire -manually install in main libraries folder
+#include <adcman.h>			// used to find perimeter wire -manually install in main libraries folder
+#include <perimeter.h>		// used for perimeter v2 receiver for Arduino sound sensors/LM386 using digitae l filter: matched filter - evaluates signal polarity of 'pulse3' signal on onADC pin (for one coil) -manually install in main libraries folder
+#include "RemoteXY_wifi.h"	// JDP used for android remote control and menus
 
 #if defined(PIXHAWK)		// don't load libraries for pixhawk
-#include "mavlink.h"		// used for pixhawk
+#include <mavlink.h>		// used for pixhawk - trying library install by Library manager
 #include <SoftwareSerial.h>	// used to set up softserial to talk to pixhawk
 SoftwareSerial Pixhawk_Serial(A10, A11);  // RX, TX
 #endif
 
 #if defined(BOARD_MEGA)
-	#include <EEPROM.h>
+	#include <EEPROM.h>		// built in 
 #endif
 
 #if defined(BOARD_DUE)
-	#include <DueFlashStorage.h>
+	#include <DueFlashStorage.h>		// install by Library manager
 	DueFlashStorage dueFlashStorage;
 #endif
 
-#include <SerialCom_non_blocking.h>
+#include <SerialCom_non_blocking.h>		//manually install in main libraries folder
 SerialCom SerialCom1 (Serial1, 40);	
 SerialCom SerialCom2 (Serial2, 80);	
 SerialCom SerialCom3 (Serial3, 40);
@@ -61,8 +61,8 @@ SerialCom SerialCom3 (Serial3, 40);
 
 
 //Libraries for Real Time Clock
-#include <stdio.h>
-#include <DS1302.h>
+#include <stdio.h>						// built in
+#include <DS1302.h>						//manually install in main libraries folder
 #define DS3231_I2C_ADDRESS 0x68
 // Convert normal decimal numbers to binary coded decimal
 byte decToBcd(byte val)
@@ -92,7 +92,7 @@ byte bcdToDec(byte val)
 //***************************************************************
 #if defined(LCD_KEYPAD)
 	//Libraries for ic2 Liquid Crystal
-	#include <LiquidCrystal_I2C.h>
+	#include <LiquidCrystal_I2C.h>  //installed by library manager
 	//LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);  // Enter the i2C address here lcd(_x__  e.g. lcd(0x27
 	LiquidCrystal_I2C lcd(0x27, 20, 4); // set the LCD address to 0x27
 	bool LCD_Screen_Keypad_Menu = 1;
@@ -104,13 +104,13 @@ byte bcdToDec(byte val)
 //****************************************************************
 
 //Libraries for the Mowing Calendar Function
-#include <TimeLib.h>
-#include <TimeAlarms.h>
+#include <TimeLib.h>			//installed by library manager
+#include <TimeAlarms.h>			//installed by library manager
 AlarmId id;
 
 
 //Compass Setup
-#include <DFRobot_QMC5883.h>
+#include <DFRobot_QMC5883.h>	//installed by library manager
 DFRobot_QMC5883 compass;
 
 // Added by JDP **********************************************************************************
@@ -124,7 +124,7 @@ HardwareSerial & message_out = Serial;  	//uncomment for print messages to norma
 // End add by JDP *********************************************************************************
 
 #if defined(WDT) and defined(BOARD_MEGA)
-	#include <avr/wdt.h>
+	#include <avr/wdt.h>					// Built in
 	bool wdt_enable_flagRun = false;
 	bool Mega_SW_restart_En = false;
 #endif // -(WDT)-
@@ -153,12 +153,9 @@ DS1302 rtc(kCePin, kIoPin, kSclkPin);
 #define echoPin3 38   //S3
 #define trigPin3 39
 
-
-
 //Bumper Microswitches
 #define Microswitch_1  47               // Define Pin 47 on the MEGA to detect the microswitch  (Bumper RH or Lift Top End Stop)
 #define Microswitch_2  46               // Define Pin 46 on the MEGA to detect the microswitch  (Bumper LH or Lift Top End Stop)
-
 
 #if defined(LCD_KEYPAD)
 	//Membrane Switch
@@ -403,8 +400,6 @@ int   Fake_All_Settings;
 int   Fake_Loops;
 int   Fake_Wire;
 bool	Fake_WheelAmp;
-
-
 
 //float Battery_Voltage_Last;
 float Amps_Last;
@@ -668,7 +663,7 @@ int Command;
 
 char Version[16] = "V9.74JDP";
 
-bool PCB                        = 1;                          // USE Printed Circuit Board Relay
+bool PCB                        = 9;                          // USE Printed Circuit Board Relay
 
 //******************* added by JDP ************************************************************************* 
 bool Use_NANO					  = 0;							// Use the Nano for battery info, rain and wheel amps
@@ -689,10 +684,10 @@ bool Run_PIXHAWK_Mission_At_Exit = 0;                          // After Exiting 
 
 //Docking Station
 bool Use_Charging_Station       = 0;      //EEPROM            // 1 if you are using the docking/charging station     0 if not
-bool CW_Tracking_To_Charge      = 1;      //EEPROM            // Clock-Wise         tracking around the boundary wire to the charging station
+bool CW_Tracking_To_Charge      = 0;      //EEPROM            // Clock-Wise         tracking around the boundary wire to the charging station
 bool CCW_Tracking_To_Charge     = 0;      //EEPROM            // Counter-Clock-Wise tracking around the boundary wire to the charging station
 bool CW_Tracking_To_Start       = 0;      //EEPROM            // Clock-Wise         tracking around the boundary wire when tracking to the start position
-bool CCW_Tracking_To_Start      = 1;      //EEPORM            // Counter-Clock-Wise tracking around the boundary wire to the charging station
+bool CCW_Tracking_To_Start      = 0;      //EEPORM            // Counter-Clock-Wise tracking around the boundary wire to the charging station
 byte Docked_Filter_Hits         = 1;                          // Number of charge signals to be detected before mower powers off
 
 
@@ -706,7 +701,7 @@ int Max_Cycle_Wire_Find_Back    = 50;     //EEPROM            // Maximum number 
 
 //Compass Settings
 int  Compass_Setup_Mode             = 1;                      // 1 to use DFRobot Library   2 to use Manual access code.  3 MechaQMC Library
-bool Compass_Activate               = 0;       //EEPROM       // Turns on the Compass (needs to be 1 to activate further compass features)
+bool Compass_Activate               = 1;       //EEPROM       // Turns on the Compass (needs to be 1 to activate further compass features)
 bool Compass_Heading_Hold_Enabled   = 1;       //EEPROM       // Activates the compass heading hold function to keep the mower straight
 int  Home_Wire_Compass_Heading      = 110;     //EEPROM       // Heading the Mower will search for the wire once the mowing is completed.
 float CPower                        = 2;       //EEPROM       // Magnification of heading to PWM - How strong the mower corrects itself in Compass Mowing
@@ -974,7 +969,7 @@ void setup() {
 	
 	for(int i=0; i<33; i++) { F_EN[i] = true; } // for CT debug
 	// remain here until told to break JDP uncomment to pause after setup is done to review results
-	/*
+
 		while(true){
 		Serial.println("press G to continue");
 		while(true){
@@ -983,8 +978,7 @@ void setup() {
 		break;
 		}
 		break;
-		}
-	*/			
+		}			
 }
 
 void loop() {
@@ -1002,9 +996,9 @@ if ((Use_ESP01_for_basic_WIFI == 1) && (RemoteXY.connect_flag ==1))
 	//Serial.print (" RemoteXY.connect_flag =  ");
 	//Serial.println(RemoteXY.connect_flag);
 	if (RemoteXY.connect_flag==1)
-	{
-		return;	
-	}
+	{									// so basically go back to void loop, since this is
+		return;					 		// at the very begining of the loop it will stay
+	}									//  in the remotexy until disconect
 }
 Serial.println (F(""));
 Serial.println(F("past the Return"));
@@ -1053,7 +1047,7 @@ if ((Mower_Docked == 1) && (TFT_Screen_Menu == 1))                Send_Mower_Doc
 // Mower is Parked ready to be started / re-started / or the mower has no docking station enabled.
 if ((Mower_Parked == 1) && (LCD_Screen_Keypad_Menu == 1))         Print_LCD_Volt_Info();                                  // Print the voltage to the LCD screen
 if (Mower_Parked == 1)                                            Check_if_Charging();
-if (Mower_Parked == 1)                                            Check_if_Raining_From_Nano ();                          // Checks if the water sensor detects Rain
+if (Mower_Parked == 1)                                            Check_if_Raining_From_Nano ();                          // Checks if the water sensor detects Rain should work with out Nano too
 if ((Mower_Parked == 1) && (LCD_Screen_Keypad_Menu == 1))         Print_LCD_Info_Parked();                                // Print information to the LCD screen
 if ((Mower_Parked == 1) && (LCD_Screen_Keypad_Menu == 1))         Check_Membrane_Switch_Input_Parked();                   // Check the membrane buttons for any input
 if ((Mower_Parked == 1) && (GPS_Enabled == 1) && (GPS_Type == 1)) Check_GPS_In_Out();

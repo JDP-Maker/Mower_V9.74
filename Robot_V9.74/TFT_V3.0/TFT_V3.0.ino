@@ -47,7 +47,8 @@ int pathlen;
 
 // Screen Setup 1
 const int XP = 8, XM = A2, YP = A3, YM = 9;                           //ID=0x9341               
-const int TS_LEFT = 960, TS_RT = 94, TS_TOP = 910, TS_BOT = 108;       
+const int TS_LEFT = 94, TS_RT = 955, TS_TOP = 138, TS_BOT = 921;		
+//const int TS_LEFT = 960, TS_RT = 94, TS_TOP = 910, TS_BOT = 108;       
 
 // Screen Setup 2
 //const int XP = 6, XM = A2, YP = A1, YM = 7;                             //ID=0x9486
@@ -476,7 +477,7 @@ bool Touch_getXY(void) {
         
         
         // Use this setting for Landscape 330
-        pixel_x = map(p.y, TS_LEFT, TS_RT, 480, 0); //.kbv makes sense to me
+        pixel_x = map(p.y, TS_LEFT, TS_RT, 490, 0); //.kbv makes sense to me
         pixel_y = map(p.x, TS_TOP, TS_BOT, 320, 0);
 
    
@@ -548,7 +549,7 @@ void setup(void){
     Serial.print(F("TFT ID = 0x"));
     Serial.println(ID, HEX);
     Load_EEPROM_Values();           // Load saved settings on TFT MEGA
-    if (Robot_Type == 1) Serial.println(F("ReP_AL Mower Touchscreen"));
+    if (Robot_Type == 1) Serial.println(F("T10 Robot Mower Touchscreen"));
     if (Robot_Type == 2) Serial.println(F("ReP_AL Aerator Touchscreen"));
     Serial.print(F("Version: "));
     Serial.println(Version);
@@ -556,7 +557,7 @@ void setup(void){
     if (ID == 0xD3D3) ID = 0x9486; // write-only shield
     tft.begin(ID);
     //tft.setRotation(1); 
-    tft.setRotation(3);            //0 = PORTRAIT USB Top Right   1 = Landscape USB TL   2 =    Portrait USB BL    3 = Landacape USB  BR
+    tft.setRotation(1);            //0 = PORTRAIT USB Top Right   1 = Landscape USB TL   2 =    Portrait USB BL    3 = Landacape USB  BR
     tft.fillScreen(BLACK);
     
 

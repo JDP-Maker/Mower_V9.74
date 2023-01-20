@@ -481,7 +481,16 @@ int16_t DFRobot_QMC5883::readRegister16(uint8_t reg)
     Wire.endTransmission();
     Wire.beginTransmission(HMC5883L_ADDRESS);
     Wire.requestFrom(HMC5883L_ADDRESS, 2);
-    while(!Wire.available()) {};
+    //while(!Wire.available()) {}; // RVES commented origin
+    int testNum=0; // RVES added
+    //while(!Wire.available() && testNum<10) { testNum++; delay(1); }; // RVES added
+    while(!Wire.available() && testNum<10) {
+    	if (testNum==9) {
+    		Serial.println(F(""));
+    		Serial.println(F(" !!! HMC Compass library timeout !!!"));
+    	}
+    	testNum++; delay(1);
+    }; // RVES added
     #if ARDUINO >= 100
         uint8_t vha = Wire.read();
         uint8_t vla = Wire.read();
@@ -501,8 +510,17 @@ int16_t DFRobot_QMC5883::readRegister16(uint8_t reg)
     Wire.endTransmission();
     Wire.beginTransmission(QMC5883_ADDRESS);
     Wire.requestFrom(QMC5883_ADDRESS, 2);
-    while(!Wire.available()) {};
-    #if ARDUINO >= 100
+    //while(!Wire.available()) {}; // RVES commented origin
+    int testNum=0; // RVES added
+    //while(!Wire.available() && testNum<10) { testNum++; delay(1); }; // RVES added
+    while(!Wire.available() && testNum<10) {
+		if (testNum==9) {
+			Serial.println(F(""));
+			Serial.println(F(" !!! QMC Compass library timeout !!!"));
+		}
+		testNum++; delay(1);
+	}; // RVES added
+	#if ARDUINO >= 100
         uint8_t vha = Wire.read();
         uint8_t vla = Wire.read();
     #else
